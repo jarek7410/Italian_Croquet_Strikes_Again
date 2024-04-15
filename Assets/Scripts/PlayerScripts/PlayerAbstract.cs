@@ -17,6 +17,13 @@ namespace GameNamespace {
     [SerializeField] protected float baseRangedResistance = 50f;
     [SerializeField] protected float baseFireResistance = 50f;
     [SerializeField] protected float baseToxineResistance = 50f;
+
+    [SerializeField] protected float dodgeMultiplier = .2f;
+    [SerializeField] protected float dodgeTime = .5f;
+
+    private bool isDodging = false;
+
+    private Vector2 dodgeDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -89,9 +96,6 @@ namespace GameNamespace {
     }
 
     protected void ForceOnRigidBody2D(Vector2 force) {
-        if (rb2d == null) {
-            return;
-        }
         if (force == Vector2.zero) {
             return;
         }
@@ -102,6 +106,50 @@ namespace GameNamespace {
         Vector2 force = speed * GetMovementInput();
 
         ForceOnRigidBody2D(force);
+    }
+
+    protected bool GetDodgeInput()
+    {
+        bool input = Input.GetButtonDown("Jump");
+        if (!input)
+        {
+            return false;
+        }
+
+        if (GetMovementInput() == Vector2.zero)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected void Dodge(Vector2 direction)
+    {
+        if (direction == Vector2.zero)
+        {
+            return;
+        }
+        direction.Normalize();
+        dodgeDirection = direction;
+        isDodging = true;
+        Invoke(nameof(EndDodge), dodgeTime);
+    }
+
+    protected void FixedDodgeMovement()
+    {
+        float speed = stats.GetCurrentStat(EntityStats.SPEED_ID);
+        rb2d.position += Time.fixedDeltaTime * speed * dodgeMultiplier * dodgeDirection;
+    }
+
+    private void EndDodge()
+    {
+        isDodging = false;
+    }
+
+    public bool IsDodging()
+    {
+        return isDodging;
     }
 }
 

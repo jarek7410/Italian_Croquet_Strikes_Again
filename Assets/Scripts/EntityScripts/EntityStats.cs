@@ -1,5 +1,5 @@
 using System;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 namespace GameNamespace
 {
@@ -13,7 +13,11 @@ namespace GameNamespace
     public static readonly byte RANGED_RESISTANCE_ID = 5;
     public static readonly byte FIRE_RESISTANCE_ID = 6;
     public static readonly byte TOXINE_RESISTANCE_ID = 7;
+    public static readonly int NUM_STATS = 8;
     private float HP;
+    private float _nextExpiration;
+    private float[,] _modifiersValues;
+    private List<StatModifier> _modifiers;
     [SerializeField] private float baseMaxHP;
     [SerializeField] private float baseSpeed;
     [SerializeField] private float baseMeleeDamage;
@@ -39,9 +43,30 @@ namespace GameNamespace
                     this.baseRangedResistance = baseRangedResistance;
                     this.baseFireResistance = baseFireResistance;
                     this.baseToxineResistance = baseToxineResistance;
+                    Init();
+    }
 
-                    HP = baseMaxHP;
+    private void Init()
+    {
+        HP = baseMaxHP;
+        _nextExpiration = float.MaxValue;
+        _modifiers = new List<StatModifier>();
+        ResetModifierTable();
+    }
+
+    public void CheckForModifierExpiration()
+    {
+        if (Time.time >= _nextExpiration)
+        {
+            foreach (StatModifier modifier in _modifiers)
+            {
+                if (modifier.IsExpired())
+                {
+                    RemoveModifier(modifier);
                 }
+            }
+        }
+    }
     
     public float GetBaseStat(byte statId) {
         switch (statId) {
@@ -67,8 +92,67 @@ namespace GameNamespace
     }
 
     public float GetCurrentStat(byte statId) {
-        // TODO: implement stat modfiers and stats calculations
-        return GetBaseStat(statId); 
+        float baseValue = GetBaseStat(statId);
+        return (baseValue + _modifiersValues[statId, 0]) * _modifiersValues[statId, 1];
+    }
+
+    public void AddModifier(StatModifier modifier)
+    {
+        _modifiers.Add(modifier);
+        if (modifier.HasExpireTime())
+        {
+            float modifierExpireTime = modifier.ExpiresAt();
+            if (modifierExpireTime < _nextExpiration)
+            {
+                _nextExpiration = modifierExpireTime;
+            }
+        }
+        ApplyModifier(modifier);
+    }
+
+    private void ApplyAllModifiers()
+    {
+        ResetModifierTable();
+        foreach (var statModifier in _modifiers)
+        {
+            ApplyModifier(statModifier);
+        }
+    }
+
+    public void RefreshModifierExpireTimer()
+    {
+        _nextExpiration = float.MaxValue;
+        foreach (var modifier in _modifiers)
+        {
+            if (modifier.HasExpireTime())
+            {
+                if (modifier.ExpiresAt() < _nextExpiration)
+                {
+                    _nextExpiration = modifier.ExpiresAt();
+                }
+            }
+        }
+    }
+    public void RemoveModifier(StatModifier modifier)
+    {
+        int columnIndex = modifier.IsPercentage() ? 1 : 0;
+        _modifiersValues[modifier.GetStatId(), columnIndex] -= modifier.GetValue();
+        _modifiers.Remove(modifier);
+    }
+    private void ApplyModifier(StatModifier modifier)
+    {
+        int columnIndex = modifier.IsPercentage() ? 1 : 0;
+        _modifiersValues[modifier.GetStatId(), columnIndex] += modifier.GetValue();
+    }
+
+    private void ResetModifierTable()
+    {
+        _modifiersValues = new float[NUM_STATS, 2];
+        for (int i = 0; i < NUM_STATS; i++)
+        {
+            _modifiersValues[i, 0] = 0f; // additive values
+            _modifiersValues[i, 1] = 1f; // multiplicative values
+        }
     }
 }
 }

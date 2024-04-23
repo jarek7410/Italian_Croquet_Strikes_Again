@@ -65,7 +65,7 @@ namespace GameNamespace
             return _statId;
         }
 
-        public bool IsPercentage()
+        public bool IsMultiplicative()
         {
             return _isMultiplicative;
         }

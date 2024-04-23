@@ -14,6 +14,7 @@ namespace GameNamespace
     public static readonly byte FIRE_RESISTANCE_ID = 6;
     public static readonly byte TOXINE_RESISTANCE_ID = 7;
     public static readonly int NUM_STATS = 8;
+    public static readonly float STAT_MIN_VALUE = 5f;
     private float HP;
     private float _nextExpiration;
     private float[,] _modifiersValues;
@@ -93,7 +94,8 @@ namespace GameNamespace
 
     public float GetCurrentStat(byte statId) {
         float baseValue = GetBaseStat(statId);
-        return (baseValue + _modifiersValues[statId, 0]) * _modifiersValues[statId, 1];
+        float currentValue = (baseValue + _modifiersValues[statId, 0]) * _modifiersValues[statId, 1];
+        return Math.Max(currentValue, STAT_MIN_VALUE);
     }
 
     public void AddModifier(StatModifier modifier)
@@ -135,13 +137,39 @@ namespace GameNamespace
     }
     public void RemoveModifier(StatModifier modifier)
     {
-        int columnIndex = modifier.IsPercentage() ? 1 : 0;
+        if (modifier.GetStatId() == MAX_HP_ID)
+        {
+            float increment = modifier.IsMultiplicative() ? -baseMaxHP * modifier.GetValue() : -modifier.GetValue();
+            if (increment > 0f)
+            {
+                HP += increment;
+            }
+            else
+            {
+                HP = Math.Max(Math.Min(HP, STAT_MIN_VALUE), HP + increment);
+            }
+        }
+        
+        int columnIndex = modifier.IsMultiplicative() ? 1 : 0;
         _modifiersValues[modifier.GetStatId(), columnIndex] -= modifier.GetValue();
         _modifiers.Remove(modifier);
     }
     private void ApplyModifier(StatModifier modifier)
     {
-        int columnIndex = modifier.IsPercentage() ? 1 : 0;
+        if (modifier.GetStatId() == MAX_HP_ID)
+        {
+            float increment = modifier.IsMultiplicative() ? baseMaxHP * modifier.GetValue() : modifier.GetValue();
+            if (increment > 0f)
+            {
+                HP += increment;
+            }
+            else
+            {
+                HP = Math.Max(Math.Min(HP, STAT_MIN_VALUE), HP + increment);
+            }
+        }
+        
+        int columnIndex = modifier.IsMultiplicative() ? 1 : 0;
         _modifiersValues[modifier.GetStatId(), columnIndex] += modifier.GetValue();
     }
 

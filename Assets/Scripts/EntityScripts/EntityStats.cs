@@ -183,6 +183,16 @@ namespace GameNamespace
         }
     }
 
+    public void ApplyDamage(AttackParams attackParams)
+    {
+        byte defenceStatId = (byte)(attackParams.GetDamageTypeId() + 4);
+        float defenceValue = GetCurrentStat(defenceStatId);
+        float damageMultiplier = 100f / (100f * defenceValue);
+        float damageDealt = attackParams.getDamageValue() * damageMultiplier;
+
+        HP -= damageDealt;
+    }
+
     private void OnValidate()
     {
         if (baseMaxHP < 1f)

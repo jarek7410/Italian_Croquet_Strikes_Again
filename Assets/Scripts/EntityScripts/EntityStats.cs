@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace GameNamespace
 {
-    public class EntityStats
+    public class EntityStats : ScriptableObject
 {
     public static readonly byte MAX_HP_ID = 0;
     public static readonly byte SPEED_ID = 1;
@@ -153,6 +153,16 @@ namespace GameNamespace
             _modifiersValues[i, 0] = 0f; // additive values
             _modifiersValues[i, 1] = 1f; // multiplicative values
         }
+    }
+
+    private void OnValidate()
+    {
+        if (baseMaxHP < 1f)
+        {
+            baseMaxHP = 1f;
+        }
+        
+        // TODO: Add remaining validations for stats
     }
 }
 }

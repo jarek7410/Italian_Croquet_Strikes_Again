@@ -26,6 +26,10 @@ namespace EnemyScript
             foreach (var player in playerList)
             {
                 var distanceNew=Vector2.Distance(this.transform.position, player.transform.position);
+                if (distanceNew < MimDistance)
+                {
+                    break;
+                }
                 if (distance > distanceNew)
                 {
                     distance = distanceNew;

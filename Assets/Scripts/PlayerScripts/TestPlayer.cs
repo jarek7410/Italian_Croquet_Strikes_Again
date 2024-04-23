@@ -8,19 +8,21 @@ namespace GameNamespace {
         CombinedInit();
     }
 
-    private void FixedUpdate() {
-        if (IsDodging())
-        {
-            FixedDodgeMovement();
-            return;
-        }
-
+    private void Update()
+    {
         if (GetDodgeInput())
         {
             Dodge(GetMovementInput());
             return;
         }
-        
+    }
+
+    private void FixedUpdate() {
+        if (IsDodging())
+        {
+            FixedDodgeMovement();
+            return;
+        }        
         if (debugOnUpdate) {
             Debug.Log("Running TestPlayer.FixedUpdate");
             Debug.Log(GetMovementInput());

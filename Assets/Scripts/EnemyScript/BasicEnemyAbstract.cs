@@ -1,16 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using GameNamespace;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public abstract class BasicEnemyAbstract : MonoBehaviour
 {
     public EntityStats stats;
     [SerializeField] protected Rigidbody2D rb2d;
     [SerializeField] protected SpriteRenderer sr;
-    // Floats storing default players stats, used for initialization
+    // Floats storing default enemy stats, used for initialization
     [SerializeField] protected float baseMaxHP = 100f;
     [SerializeField] protected float baseSpeed = 100f;
     [SerializeField] protected float baseMeleeDamage = 30f;
@@ -24,31 +21,19 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     [SerializeField] protected float dodgeTime = .5f;
     [SerializeField] protected float AwarnessDisdtanse = 5f;
     [SerializeField] protected float MimDistance = 1.05f;
-    protected PlayerAbstract[] playerList;
+    protected PlayerAbstract player;
 
     private bool isDodging = false;
 
     private Vector2 dodgeDirection;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-    // a utitlity function that executes all initializations, PlayerStats, RigidBody2d etc...
+    // a utility function that executes all initializations, EnemyStats, RigidBody2d etc...
     // if you do not want to init a component set doInit_componentName_ to false in parameters
     protected void CombinedInit(bool doInitStats = true,
         bool doInitRigidBody2D = true,
         bool doInitSpriteRenderer = true) {
             if (doInitStats) {
-                InitPlayerStats();
+                InitEnemyStats();
             }
             if (doInitRigidBody2D) {
                 InitRigidbody2D();
@@ -57,25 +42,26 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
                 InitSpriteRendered();
             }
 
-            playerList = FindObjectsOfType<PlayerAbstract>();
-            if (playerList.Length <= 0)
+            player = FindFirstObjectByType<PlayerAbstract>();
+            if (player == null)
             {
                 throw new Exception("no player found");
             }
     }
-    protected void InitPlayerStats() {
+    protected void InitEnemyStats() {
         if (stats != null) {
-            Debug.Log("Warning - player stats are already initialized!");
+            Debug.Log("Warning - Enemy stats are already initialized!");
             return;
         }
-        stats = new EntityStats(baseMaxHP,
-        baseSpeed,
-        baseMeleeDamage,
-        baseRangedDamage,
-        baseMeleeResistance,
-        baseRangedResistance,
-        baseFireResistance,
-        baseToxineResistance);
+        stats = ScriptableObject.CreateInstance<EntityStats>();
+        stats.SetEntityStats(baseMaxHP,
+            baseSpeed,
+            baseMeleeDamage,
+            baseRangedDamage,
+            baseMeleeResistance,
+            baseRangedResistance,
+            baseFireResistance,
+            baseToxineResistance);
     }
 // by default not using gravity (Rigidbody2d.gravityScale = 0.0)
 // and increasing the drag

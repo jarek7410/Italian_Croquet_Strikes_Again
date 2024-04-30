@@ -1,7 +1,3 @@
-using System;
-using GameNamespace;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace EnemyScript
@@ -21,24 +17,16 @@ namespace EnemyScript
 
         protected override Vector2 GetMovement()
         {
-            Vector2 vectorToClosestEnemy=Vector2.zero;
-            float distance = AwarnessDisdtanse;
-            foreach (var player in playerList)
-            {
-                var distanceNew=Vector2.Distance(this.transform.position, player.transform.position);
-                if (distanceNew < MimDistance)
-                {
-                    break;
-                }
-                if (distance > distanceNew)
-                {
-                    distance = distanceNew;
-                    vectorToClosestEnemy = player.transform.position -this.transform.position;
-                }
-            }
+            Vector2 movementVector=Vector2.zero;
+            Vector3 distToPlayer = player.transform.position - transform.position;
+            Vector2 distToPlayer2D = new Vector2(distToPlayer.x, distToPlayer.y);
 
-            Debug.Log(vectorToClosestEnemy);
-            return vectorToClosestEnemy.normalized;
+            if (distToPlayer2D.magnitude <= AwarnessDisdtanse)
+            {
+                movementVector = distToPlayer2D.normalized;
+            }
+            
+            return movementVector;
         }
     }
 }

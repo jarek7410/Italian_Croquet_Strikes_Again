@@ -28,7 +28,7 @@ namespace GameNamespace
     [SerializeField] private float baseFireResistance;
     [SerializeField] private float baseToxineResistance;
 
-    public EntityStats(float baseMaxHP = 100f,
+    public void SetEntityStats(float baseMaxHP = 100f,
                 float baseSpeed = 100f,
                 float baseMeleeDamage = 30f,
                 float baseRangedDamage = 20f,

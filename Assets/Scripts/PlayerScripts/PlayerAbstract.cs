@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameNamespace {
@@ -24,25 +22,14 @@ namespace GameNamespace {
     private bool isDodging = false;
 
     private Vector2 dodgeDirection;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     protected Vector2 GetMovementInput() {
         float horizontal = Input.GetAxis("Horizontal");
-        float veritcal = Input.GetAxis("Vertical");
+        float vertical = Input.GetAxis("Vertical");
 
-        Vector2 inputVector = new Vector2(horizontal, veritcal);
+        Vector2 inputVector = new Vector2(horizontal, vertical);
 
-        if (inputVector.magnitude > 1.0f) {
+        if (inputVector.magnitude > 1f) {
             inputVector.Normalize();
         }
 
@@ -69,7 +56,9 @@ namespace GameNamespace {
             Debug.Log("Warning - player stats are already initialized!");
             return;
         }
-        stats = new EntityStats(baseMaxHP,
+
+        stats = ScriptableObject.CreateInstance<EntityStats>();
+        stats.SetEntityStats(baseMaxHP,
         baseSpeed,
         baseMeleeDamage,
         baseRangedDamage,

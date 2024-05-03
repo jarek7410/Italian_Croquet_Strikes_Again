@@ -9,10 +9,13 @@ namespace GameNamespace {
 
     private void Update()
     {
+        if(IsDodging()) {
+            return;
+        }
+
         if (GetDodgeInput())
         {
             Dodge(GetMovementInput());
-            return;
         }
     }
 

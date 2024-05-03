@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace GameNamespace {
     public class TestPlayer : PlayerAbstract {
-        [SerializeField] private bool debugOnUpdate = true;
     private void Start() {
         Debug.Log("Running TestPlayer.Start()");
         CombinedInit();
@@ -23,10 +22,6 @@ namespace GameNamespace {
             FixedDodgeMovement();
             return;
         }        
-        if (debugOnUpdate) {
-            Debug.Log("Running TestPlayer.FixedUpdate");
-            Debug.Log(GetMovementInput());
-        }
         FixedMovementOnRigidbody2D();
     }
 

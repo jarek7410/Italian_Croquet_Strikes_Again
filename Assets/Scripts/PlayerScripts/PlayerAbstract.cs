@@ -156,6 +156,13 @@ namespace GameNamespace {
     {
         return isDodging;
     }
+
+    public Vector3 ToMouseDirection() {
+        Vector3 worldPos3D = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 distToMouse = worldPos3D - transform.position;
+        distToMouse.z = 0f;
+        return distToMouse.normalized;
+    }
 }
 
 }

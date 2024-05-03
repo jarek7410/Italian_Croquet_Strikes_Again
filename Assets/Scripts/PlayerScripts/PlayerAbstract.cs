@@ -163,6 +163,10 @@ namespace GameNamespace {
         distToMouse.z = 0f;
         return distToMouse.normalized;
     }
+
+    public void DealDamage(AttackParams attackParams) {
+        stats.ApplyDamage(attackParams);
+    }
 }
 
 }

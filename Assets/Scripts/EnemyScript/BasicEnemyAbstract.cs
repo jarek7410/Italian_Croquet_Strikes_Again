@@ -23,10 +23,6 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     [SerializeField] protected float MimDistance = 1.05f;
     protected PlayerAbstract player;
 
-    private bool isDodging = false;
-
-    private Vector2 dodgeDirection;
-
     // a utility function that executes all initializations, EnemyStats, RigidBody2d etc...
     // if you do not want to init a component set doInit_componentName_ to false in parameters
     protected void CombinedInit(bool doInitStats = true,
@@ -95,5 +91,21 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         ForceOnRigidBody2D(force);
     }
 
+    public void DealDamage(AttackParams attackParams) {
+        stats.ApplyDamage(attackParams);
+        float hp = stats.GetHP();
+        Debug.Log("Current HP: " + hp);
+        if (hp < 0) {
+            Kill();
+        }
+    }
+
+    public void Kill() {
+        OnKill();
+        Destroy(gameObject);
+    }
+    protected void OnKill() {
+        Debug.Log($"{gameObject.name} died");
+    }
 }
 

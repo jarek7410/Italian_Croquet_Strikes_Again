@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace GameNamespace 
 {
-    public class AttackParams  : ScriptableObject
+    public class AttackParams
     {
         public static readonly byte MELEE = 0;
         public static readonly byte RANGED = 1;
         public static readonly byte FIRE = 2;
         public static readonly byte TOXINE = 3;
 
-        [SerializeField] private byte damageTypeId;
-        [SerializeField] private float value;
+        private byte damageTypeId;
+        private float value;
         
         public AttackParams(byte damageTypeId, float value)
         {
@@ -21,7 +21,7 @@ namespace GameNamespace
             }
             
             this.damageTypeId = damageTypeId;
-            value = this.value;
+            this.value = value;
         }
         public byte GetDamageTypeId()
         {

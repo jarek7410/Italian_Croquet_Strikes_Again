@@ -187,7 +187,7 @@ namespace GameNamespace
     {
         byte defenceStatId = (byte)(attackParams.GetDamageTypeId() + 4);
         float defenceValue = GetCurrentStat(defenceStatId);
-        float damageMultiplier = 100f / (100f * defenceValue);
+        float damageMultiplier = 100f / (100f + defenceValue);
         float damageDealt = attackParams.getDamageValue() * damageMultiplier;
 
         HP -= damageDealt;
@@ -201,6 +201,10 @@ namespace GameNamespace
         }
         
         // TODO: Add remaining validations for stats
+    }
+
+    public float GetHP() {
+        return HP;
     }
 }
 }

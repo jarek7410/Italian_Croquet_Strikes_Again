@@ -42,7 +42,8 @@ namespace GameNamespace
                     if (enemy == null) {
                         Debug.Log("Something went wrong - enemy has no basicenemyabstract");
                     }
-                    // TODO: Apply damage
+                    enemy.DealDamage(new AttackParams(AttackParams.RANGED, _bulletDamage));
+                    Destroy(gameObject);
                     break;
                 case "Obstacle":
                     Debug.Log("Obstacle collision");

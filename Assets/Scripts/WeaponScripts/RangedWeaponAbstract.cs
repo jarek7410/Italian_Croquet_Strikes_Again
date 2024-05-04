@@ -11,18 +11,16 @@ public class RangedWeaponAbstract : MonoBehaviour
     protected bool isEquiped = false;
     protected bool isReloaded = true;
     private Transform _playerTransform;
-    private EntityStats _playerStats;
 
-    protected void InitPlayerComponents() {
+    protected void InitPlayer() {
         if (player == null) {
             player = FindFirstObjectByType<PlayerAbstract>();
             if (player == null)
             {
                 throw new Exception("no player found");
             }
+            _playerTransform = player.transform;
         }
-        _playerTransform = player.transform;
-        _playerStats = player.stats;
     }
 
     protected void ShootBullet() {
@@ -35,7 +33,7 @@ public class RangedWeaponAbstract : MonoBehaviour
         bulletInstatce.Init(
             weaponParams.bulletParams.bulletSpeed,
             weaponParams.bulletParams.bulletLifetime,
-            _playerStats.GetCurrentStat(EntityStats.RANGED_DAMAGE_ID),
+            player.GetCurrentStat(EntityStats.RANGED_DAMAGE_ID),
             shotDirection);
 
         isReloaded = false;

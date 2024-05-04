@@ -3,7 +3,7 @@ using UnityEngine;
 namespace GameNamespace{
     public class BasicRangedWeapon: RangedWeaponAbstract{
         private void Start() {
-            InitPlayerComponents();
+            InitPlayer();
             Equip();
         }
 

@@ -167,6 +167,10 @@ namespace GameNamespace {
     public void DealDamage(AttackParams attackParams) {
         stats.ApplyDamage(attackParams);
     }
+
+    public float GetCurrentStat(byte statId) {
+        return stats.GetCurrentStat(statId);
+    }
 }
 
 }

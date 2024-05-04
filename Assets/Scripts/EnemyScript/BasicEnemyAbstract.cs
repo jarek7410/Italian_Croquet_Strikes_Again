@@ -16,9 +16,6 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     [SerializeField] protected float baseRangedResistance = 50f;
     [SerializeField] protected float baseFireResistance = 50f;
     [SerializeField] protected float baseToxineResistance = 50f;
-
-    [SerializeField] protected float dodgeMultiplier = .2f;
-    [SerializeField] protected float dodgeTime = .5f;
     [SerializeField] protected float AwarnessDisdtanse = 5f;
     [SerializeField] protected float MimDistance = 1.05f;
     protected PlayerAbstract player;

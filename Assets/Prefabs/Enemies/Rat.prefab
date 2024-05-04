@@ -177,8 +177,8 @@ MonoBehaviour:
   stats: {fileID: 0}
   rb2d: {fileID: 0}
   sr: {fileID: 0}
-  baseMaxHP: 100
-  baseSpeed: 70
+  baseMaxHP: 50
+  baseSpeed: 90
   baseMeleeDamage: 30
   baseRangedDamage: 20
   baseMeleeResistance: 50
@@ -187,5 +187,5 @@ MonoBehaviour:
   baseToxineResistance: 50
   dodgeMultiplier: 0.2
   dodgeTime: 0.5
-  AwarnessDisdtanse: 8
+  AwarnessDisdtanse: 12
   MimDistance: 1.05

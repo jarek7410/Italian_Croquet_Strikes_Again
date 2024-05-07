@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameNamespace;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,7 +10,7 @@ public class RatMovment : MonoBehaviour
     private Vector3 target;
 
     private NavMeshAgent agent;
-    [SerializeField] private GameObject TargetObject;
+    [SerializeField] private GameObject targetObject;
 
     private void Awake()
     {
@@ -21,6 +22,14 @@ public class RatMovment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (targetObject == null) {
+            var player = FindFirstObjectByType<PlayerAbstract>();
+            if (player == null)
+            {
+                throw new Exception("no player found");
+            }
+            targetObject = player.gameObject;
+        }
     }
 
     // Update is called once per frame
@@ -36,7 +45,7 @@ public class RatMovment : MonoBehaviour
         // {
         //     target = Camera.main.ScreenToViewportPoint(Input.mousePosition);
         // }
-        target = TargetObject.transform.position;
+        target = targetObject.transform.position;
     }
 
     void SetAgentPosition()

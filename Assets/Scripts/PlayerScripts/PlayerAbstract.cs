@@ -5,7 +5,6 @@ namespace GameNamespace {
     public abstract class PlayerAbstract : MonoBehaviour
 {
     public EntityStats stats;
-    protected GameObject playerAsGameObject;
     [SerializeField] protected Rigidbody2D rb2d;
     [SerializeField] protected SpriteRenderer sr;
     // Floats storing default players stats, used for initialization
@@ -42,8 +41,7 @@ namespace GameNamespace {
     // if you do not want to init a component set doInit_componentName_ to false in parameters
     protected void CombinedInit(bool doInitStats = true,
         bool doInitRigidBody2D = true,
-        bool doInitSpriteRenderer = true,
-        bool doInitPlayerAsGameobject = true) {
+        bool doInitSpriteRenderer = true) {
             if (doInitStats) {
                 InitPlayerStats();
             }
@@ -52,10 +50,6 @@ namespace GameNamespace {
             }
             if (doInitSpriteRenderer) {
                 InitSpriteRendered();
-            }
-            if (doInitPlayerAsGameobject)
-            {
-                InitPlayerAsGameObject();    
             }
     }
     protected void InitPlayerStats() {
@@ -89,11 +83,6 @@ namespace GameNamespace {
         if (sr == null) {
             sr = GetComponent<SpriteRenderer>();
         }
-    }
-
-    protected void InitPlayerAsGameObject()
-    {
-        playerAsGameObject = GameObject.FindGameObjectWithTag("Player");
     }
 
     protected void ForceOnRigidBody2D(Vector2 force) {
@@ -135,7 +124,7 @@ namespace GameNamespace {
         dodgeDirection = direction;
         isDodging = true;
         int dodgingLayerIndex = LayerMask.NameToLayer("Dodging");
-        playerAsGameObject.layer = dodgingLayerIndex;
+        gameObject.layer = dodgingLayerIndex;
         Invoke(nameof(EndDodge), dodgeTime);
     }
 
@@ -149,7 +138,7 @@ namespace GameNamespace {
     {
         isDodging = false;
         int entitiesLayerIndex = LayerMask.NameToLayer("Entities");
-        playerAsGameObject.layer = entitiesLayerIndex;
+        gameObject.layer = entitiesLayerIndex;
     }
 
     public bool IsDodging()

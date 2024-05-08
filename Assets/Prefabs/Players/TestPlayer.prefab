@@ -113,7 +113,7 @@ MonoBehaviour:
   baseRangedResistance: 50
   baseFireResistance: 50
   baseToxineResistance: 50
-  dodgeMultiplier: 0.2
+  dodgeMultiplier: 1.5
   dodgeTime: 0.5
 --- !u!50 &7165968635799649898
 Rigidbody2D:

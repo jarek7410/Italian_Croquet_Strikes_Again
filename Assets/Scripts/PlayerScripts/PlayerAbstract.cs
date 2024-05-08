@@ -17,7 +17,7 @@ namespace GameNamespace {
     [SerializeField] protected float baseFireResistance = 50f;
     [SerializeField] protected float baseToxineResistance = 50f;
 
-    [SerializeField] protected float dodgeMultiplier = .2f;
+    [SerializeField] protected float dodgeMultiplier = 1.5f;
     [SerializeField] protected float dodgeTime = .5f;
 
     private bool isDodging = false;
@@ -131,7 +131,7 @@ namespace GameNamespace {
     protected void FixedDodgeMovement()
     {
         float speed = stats.GetCurrentStat(EntityStats.SPEED_ID);
-        rb2d.position += Time.fixedDeltaTime * speed * dodgeMultiplier * dodgeDirection;
+        rb2d.AddForce(speed * dodgeMultiplier * dodgeDirection);
     }
 
     private void EndDodge()

@@ -104,5 +104,9 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     protected void OnKill() {
         Debug.Log($"{gameObject.name} died");
     }
+
+    public void Knockback(Vector2 direction, float force) {
+        rb2d.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+    }
 }
 

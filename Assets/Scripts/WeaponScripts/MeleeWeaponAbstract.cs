@@ -17,9 +17,8 @@ public class MeleeWeaponAbstract : MonoBehaviour
     private float _swingAngle;
     private float _swingRelativeAngle;
     private Vector3 _swingPosition;
-
-    protected List<int> hitEnemiesHash;
-    // TODO: Implement dealing melee damage and equip weapon system
+    protected List<int> hitEnemiesHashCodes;
+    // TODO: Implement equip weapon system
     protected void InitPlayer() {
         if (player == null) {
             player = FindFirstObjectByType<PlayerAbstract>();
@@ -52,7 +51,7 @@ public class MeleeWeaponAbstract : MonoBehaviour
         _swingPosition = player.ToMouseDirection();
         isSwinging = true;
         isRecharged = false;
-        hitEnemiesHash = new List<int>();
+        hitEnemiesHashCodes = new List<int>();
         Invoke(nameof(EndSwing), weaponParams.swingTime);
         Invoke(nameof(Recharge), weaponParams.swingTime + weaponParams.rechargeTime);
     
@@ -106,5 +105,25 @@ public class MeleeWeaponAbstract : MonoBehaviour
 
     protected void EndSwing() {
         isSwinging = false;
+    }
+
+        private void OnTriggerEnter2D(Collider2D other) {
+        if (!isSwinging) {
+            return;
+        }
+        var otherGameObject = other.gameObject;
+        if (otherGameObject.tag != "Enemy") {
+            return;
+        }
+        if (hitEnemiesHashCodes.Contains(otherGameObject.GetHashCode())) {
+            return;
+        }
+        hitEnemiesHashCodes.Add(otherGameObject.GetHashCode());
+        Vector3 knockbackDirection3D = otherGameObject.transform.position - _playerTransform.position;
+        Vector2 knockbackDirection = new Vector2(knockbackDirection3D.x, knockbackDirection3D.y);
+        var enemy = otherGameObject.GetComponent<BasicEnemyAbstract>();
+        enemy.Knockback(knockbackDirection, weaponParams.knockbackForce);
+        enemy.DealDamage(new AttackParams(AttackParams.MELEE,
+            player.GetCurrentStat(EntityStats.MELEE_DAMAGE_ID)));
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd804367cbf3bf34eb69cfe020373635, type: 3}
   m_Name: SampleMeleeWeaponParams
   m_EditorClassIdentifier: 
-  swingTime: 0.5
-  rechargeTime: 0.29
-  swingDegrees: 90
-  knockbackForce: 10
+  swingTime: 0.23
+  rechargeTime: 0.2
+  swingDegrees: 136
+  knockbackForce: 49.3

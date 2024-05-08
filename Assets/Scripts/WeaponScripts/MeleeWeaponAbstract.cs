@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using GameNamespace;
 using UnityEngine;
 
-public class MeleeWeaponAbstract : MonoBehaviour
+public abstract class MeleeWeaponAbstract : WeaponAbstract
 {
     [SerializeField] protected PlayerAbstract player;
     [SerializeField] protected MeleeWeaponParams weaponParams;
     [SerializeField] private float distanceToPlayer = .7f;
 
     [SerializeField] protected Collider2D hitbox;
-    protected bool isEquiped = false;
     protected bool isRecharged = true;
     protected bool isSwinging = false;
     private Transform _playerTransform;
@@ -18,7 +17,6 @@ public class MeleeWeaponAbstract : MonoBehaviour
     private float _swingRelativeAngle;
     private Vector3 _swingPosition;
     protected List<int> hitEnemiesHashCodes;
-    // TODO: Implement equip weapon system
     protected void InitPlayer() {
         if (player == null) {
             player = FindFirstObjectByType<PlayerAbstract>();
@@ -37,7 +35,7 @@ public class MeleeWeaponAbstract : MonoBehaviour
     }
 
     protected void Swing() {
-        if (!isEquiped) {
+        if (!IsEquiped()) {
             return;
         }
 
@@ -88,15 +86,10 @@ public class MeleeWeaponAbstract : MonoBehaviour
     
 
     protected bool GetAttackInput() {
-        if (isEquiped) {
+        if (IsEquiped()) {
             return Input.GetButtonDown("Fire1");
         }
         return false;
-    }
-
-
-    public void Equip() {
-        isEquiped = true;
     }
 
     public void Recharge() {

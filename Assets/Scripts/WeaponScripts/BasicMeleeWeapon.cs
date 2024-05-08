@@ -4,11 +4,10 @@ public class BasicMeleeWeapon : MeleeWeaponAbstract {
     private void Start() {
         InitHitbox();
         InitPlayer();
-        Equip();
     }
 
     private void Update() {
-        if (!isEquiped) {
+        if (!IsEquiped()) {
             return;
         }
         Draw();

@@ -2,13 +2,12 @@ using System;
 using GameNamespace;
 using UnityEngine;
 
-public class RangedWeaponAbstract : MonoBehaviour
+public abstract class RangedWeaponAbstract : WeaponAbstract
 {
     [SerializeField] protected PlayerAbstract player;
     [SerializeField] protected RangedWeaponParams weaponParams;
     [SerializeField] protected Bullet bullet;
     [SerializeField] private float distanceToPlayer = .7f;
-    protected bool isEquiped = false;
     protected bool isReloaded = true;
     private Transform _playerTransform;
 
@@ -41,7 +40,7 @@ public class RangedWeaponAbstract : MonoBehaviour
     }
 
     protected bool GetShootInput() {
-        if (isEquiped) {
+        if (IsEquiped()) {
             return Input.GetButtonDown("Fire1");
         }
         return false;
@@ -57,10 +56,6 @@ public class RangedWeaponAbstract : MonoBehaviour
         float angle = Mathf.Atan2(toMouse.y, toMouse.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         transform.rotation = rotation;
-    }
-
-    public void Equip() {
-        isEquiped = true;
     }
 
     public void Reload() {

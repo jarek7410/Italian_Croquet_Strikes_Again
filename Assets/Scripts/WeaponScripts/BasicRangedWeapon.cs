@@ -4,11 +4,10 @@ namespace GameNamespace{
     public class BasicRangedWeapon: RangedWeaponAbstract{
         private void Start() {
             InitPlayer();
-            //Equip();
         }
 
         private void Update() {
-            if (!isEquiped) {
+            if (!IsEquiped()) {
                 return;
             }
             Draw();

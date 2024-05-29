@@ -80,11 +80,12 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         }
     }
 
-    protected void InitNavMeshAgent(bool updateRotation = false, bool updateUpAxis = false) {
+    protected void InitNavMeshAgent(bool updateRotation = false, bool updateUpAxis = false, float speed = 0) {
         if (navMeshAgent == null) {
             navMeshAgent = GetComponent<NavMeshAgent>();
             navMeshAgent.updateRotation = updateRotation;
             navMeshAgent.updateUpAxis = updateUpAxis;
+            navMeshAgent.speed = speed;
         }
     }
 
@@ -124,7 +125,7 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         rb2d.AddForce(direction.normalized * force, ForceMode2D.Impulse);
     }
 
-    protected void NavMeshMoveToPlayer() {
+    protected Vector2 NavMeshDirectionToPlayer() {
         Vector3 playerPosition = player.transform.position;
 
         navMeshAgent.SetDestination(new Vector3(
@@ -132,6 +133,13 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
             playerPosition.y,
             transform.position.z
         ));
+
+        Vector3[] corners = navMeshAgent.path.corners;
+        if (corners.Length < 2) {
+            return new Vector2(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y).normalized;
+        }
+
+        return new Vector2(corners[1].x - corners[0].x, corners[1].y - corners[0].y).normalized;
     }
 }
 

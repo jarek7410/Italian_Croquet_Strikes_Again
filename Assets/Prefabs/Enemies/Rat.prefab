@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7698646947211626819}
   - component: {fileID: 1209577569124892697}
   - component: {fileID: 6851415874910556360}
-  - component: {fileID: 4712433663621044036}
   - component: {fileID: 3353268259147854976}
   m_Layer: 8
   m_Name: Rat
@@ -181,7 +180,7 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   sr: {fileID: 0}
   baseMaxHP: 50
-  baseSpeed: 90
+  baseSpeed: 2000
   baseMeleeDamage: 30
   baseRangedDamage: 20
   baseMeleeResistance: 50
@@ -212,19 +211,6 @@ NavMeshAgent:
   m_BaseOffset: 0.055
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4712433663621044036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8628295845385508194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ebc228ed8b53b45927b0ffe9a48f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetObject: {fileID: 0}
 --- !u!95 &3353268259147854976
 Animator:
   serializedVersion: 7

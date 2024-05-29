@@ -12,7 +12,7 @@ namespace EnemyScript
 
         private void FixedUpdate()
         {   
-            FixedMovementOnRigidbody2D();
+            NavMeshMoveToPlayer();
         }
 
         protected override Vector2 GetMovement()

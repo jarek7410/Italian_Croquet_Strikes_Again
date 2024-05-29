@@ -1,6 +1,7 @@
 using System;
 using GameNamespace;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class BasicEnemyAbstract : MonoBehaviour
 {
@@ -19,12 +20,14 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     [SerializeField] protected float AwarnessDisdtanse = 5f;
     [SerializeField] protected float MimDistance = 1.05f;
     protected PlayerAbstract player;
+    protected NavMeshAgent navMeshAgent;
 
     // a utility function that executes all initializations, EnemyStats, RigidBody2d etc...
     // if you do not want to init a component set doInit_componentName_ to false in parameters
     protected void CombinedInit(bool doInitStats = true,
         bool doInitRigidBody2D = true,
-        bool doInitSpriteRenderer = true) {
+        bool doInitSpriteRenderer = true,
+        bool doInitNavMeshAgent = true) {
             if (doInitStats) {
                 InitEnemyStats();
             }
@@ -34,12 +37,16 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
             if (doInitSpriteRenderer) {
                 InitSpriteRendered();
             }
-
+            if (doInitNavMeshAgent) {
+                InitNavMeshAgent();
+            }
             player = FindFirstObjectByType<PlayerAbstract>();
             if (player == null)
             {
                 throw new Exception("no player found");
             }
+
+            
     }
     protected void InitEnemyStats() {
         if (stats != null) {
@@ -70,6 +77,14 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     protected void InitSpriteRendered() {
         if (sr == null) {
             sr = GetComponent<SpriteRenderer>();
+        }
+    }
+
+    protected void InitNavMeshAgent(bool updateRotation = false, bool updateUpAxis = false) {
+        if (navMeshAgent == null) {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            navMeshAgent.updateRotation = updateRotation;
+            navMeshAgent.updateUpAxis = updateUpAxis;
         }
     }
 
@@ -107,6 +122,16 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
 
     public void Knockback(Vector2 direction, float force) {
         rb2d.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+    }
+
+    protected void NavMeshMoveToPlayer() {
+        Vector3 playerPosition = player.transform.position;
+
+        navMeshAgent.SetDestination(new Vector3(
+            playerPosition.x,
+            playerPosition.y,
+            transform.position.z
+        ));
     }
 }
 

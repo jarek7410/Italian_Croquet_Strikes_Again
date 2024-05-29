@@ -5,12 +5,15 @@ using GameNamespace;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class RatMovment : MonoBehaviour
 {
     private Vector3 target;
 
     private NavMeshAgent agent;
     [SerializeField] private GameObject targetObject;
+    [SerializeField] private GameObject TargetObject;
+    
 
     private void Awake()
     {

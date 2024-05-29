@@ -755,74 +755,6 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
---- !u!1 &574247762
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 574247765}
-  - component: {fileID: 574247764}
-  - component: {fileID: 574247763}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &574247763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574247762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &574247764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574247762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &574247765
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574247762}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &737969577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8264436071247543821, guid: 0eee43513c0db394a9bdb62cb6a5613c, type: 3}
@@ -1440,16 +1372,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3384955710720728231, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5.7707996
-      objectReference: {fileID: 0}
-    - target: {fileID: 3384955710720728231, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.22
+      value: -4.4315877
       objectReference: {fileID: 0}
     - target: {fileID: 3384955710720728231, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.26
+      value: 1.3328078
       objectReference: {fileID: 0}
     - target: {fileID: 3384955710720728231, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1483,29 +1411,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3890908074360767504, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3890908074360767504, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4712433663621044036, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
       propertyPath: TargetObject
       value: 
-      objectReference: {fileID: 819511968}
-    - target: {fileID: 7698646947211626819, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
-      propertyPath: m_Size.y
-      value: 0.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 7698646947211626819, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7698646947211626819, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8628295845385508194, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
       propertyPath: m_Name
@@ -2071,4 +1979,10 @@ SceneRoots:
   - {fileID: 502370336}
   - {fileID: 1736902320}
   - {fileID: 951844024}
-  - {fileID: 574247765}
+  - {fileID: 406675841}
+  - {fileID: 1277514309}
+  - {fileID: 1331192783}
+  - {fileID: 1766464373}
+  - {fileID: 2032751329}
+  - {fileID: 2081418807}
+  - {fileID: 1413370194}

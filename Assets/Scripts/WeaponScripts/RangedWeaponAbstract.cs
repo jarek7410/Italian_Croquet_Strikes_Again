@@ -8,7 +8,8 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
     [SerializeField] protected RangedWeaponParams weaponParams;
     [SerializeField] protected Bullet bullet;
     [SerializeField] private float distanceToPlayer = .7f;
-    protected bool isReloaded = true;
+    protected bool isReloading = false;
+    protected bool isShotReady = true;
     private Transform _playerTransform;
 
     protected void InitPlayer() {
@@ -35,15 +36,25 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
             player.GetCurrentStat(EntityStats.RANGED_DAMAGE_ID),
             shotDirection);
 
-        isReloaded = false;
-        Invoke(nameof(Reload), weaponParams.reloadTime);
+        isShotReady = false;
+        weaponParams.DecrementBullets();
+        Invoke(nameof(ReadyShot), weaponParams.betweenShotsTime);
     }
 
     protected bool GetShootInput() {
-        if (IsEquiped()) {
+        if (IsEquiped() && weaponParams.BulletsLeft() > 0) {
+            // for automatic weapons button must be held down
+            if (weaponParams.isAutomatic) {
+                return Input.GetButton("Fire1");
+            }
+            // for not automatic weapons button must be pressed
             return Input.GetButtonDown("Fire1");
         }
         return false;
+    }
+
+    protected bool GetReloadInput() {
+        return weaponParams.BulletsLeft() < weaponParams.magazineSize && Input.GetKeyDown(KeyCode.R);
     }
 
     protected void Draw() {
@@ -59,6 +70,16 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
     }
 
     public void Reload() {
-        isReloaded = true;
+        isReloading = true;
+        Invoke(nameof(FinishReloading), weaponParams.reloadTime);
+    }
+
+    protected void FinishReloading() {
+        isReloading = false;
+        weaponParams.ReloadBullets();
+    }
+
+    public void ReadyShot() {
+        isShotReady = true;
     }
 }

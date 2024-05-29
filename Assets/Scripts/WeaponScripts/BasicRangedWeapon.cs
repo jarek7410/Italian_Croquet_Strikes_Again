@@ -11,11 +11,20 @@ namespace GameNamespace{
                 return;
             }
             Draw();
-            if (isReloaded && !player.IsDodging()) {
-                if (GetShootInput()) {
-                    ShootBullet();
-                }
+            if (player.IsDodging()) {
+                return;
             }
+            if (isReloading) {
+                return;
+            }
+            if (GetShootInput() && isShotReady) {
+                ShootBullet();
+                return;
+            }
+            if (GetReloadInput()) {
+                Reload();
+            }
+
         }
     }
 }

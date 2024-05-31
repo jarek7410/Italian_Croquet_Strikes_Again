@@ -28,6 +28,8 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
         if (shotDirection == Vector3.zero) {
             return;
         }
+        float shotOffset = UnityEngine.Random.Range(- weaponParams.spreadDegrees, weaponParams.spreadDegrees);
+        shotDirection = Quaternion.AngleAxis(shotOffset, Vector3.forward) * shotDirection;
 
         var bulletInstatce = Instantiate(bullet, transform.position, transform.rotation);
         bulletInstatce.Init(

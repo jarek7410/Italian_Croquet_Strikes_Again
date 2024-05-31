@@ -16,7 +16,7 @@ MonoBehaviour:
   magazineSize: 30
   betweenShotsTime: 0.08
   reloadTime: 0.5
-  spreadDegrees: 1
+  spreadDegrees: 5
   bulletParams:
     bulletLifetime: 5
     bulletSpeed: 22.9

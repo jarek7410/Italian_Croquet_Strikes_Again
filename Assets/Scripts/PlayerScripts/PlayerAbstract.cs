@@ -37,8 +37,10 @@ namespace GameNamespace {
         return inputVector;
     }
 
-    // a utitlity function that executes all initializations, PlayerStats, RigidBody2d etc...
-    // if you do not want to init a component set doInit_componentName_ to false in parameters
+    /// <summary>
+    /// A utitlity function that executes all initializations, PlayerStats, RigidBody2d etc...
+    /// if you do not want to init a component set doInit_componentName_ to false in parameters
+    /// </summary>
     protected void CombinedInit(bool doInitStats = true,
         bool doInitRigidBody2D = true,
         bool doInitSpriteRenderer = true) {
@@ -86,9 +88,6 @@ namespace GameNamespace {
     }
 
     protected void ForceOnRigidBody2D(Vector2 force) {
-        if (force == Vector2.zero) {
-            return;
-        }
         rb2d.AddForce(force);
     }
     protected void FixedMovementOnRigidbody2D() {
@@ -159,6 +158,57 @@ namespace GameNamespace {
 
     public float GetCurrentStat(byte statId) {
         return stats.GetCurrentStat(statId);
+    }
+
+    /// <summary>
+    /// Method for performing tasks in <c>Update</c>
+    /// </summary>
+    /// <returns>
+    /// Boolean value escribing whether further inputs / actions should be processed in this update frame
+    /// </returns>
+    /// <param name="returnIfDodging"> Specify if dodge should cause return (returns <c>false</c>)</param>
+    /// <param name="doGetDogdeInput"> Parameter specifing wheter dodge input should be considered in this update frame </param>
+    protected bool OnUpdateTasks(
+        bool returnIfDodging = true,
+        bool doGetDogdeInput = true) {
+        if(IsDodging() && returnIfDodging) {
+            return false;
+        }
+
+        if (GetDodgeInput() && doGetDogdeInput)
+        {
+            Dodge(GetMovementInput());
+            return false;
+        }
+
+        return true;
+    }
+    /// <summary>
+    /// Method for performing tasks in <c>FixedUpdate</c>
+    /// </summary>
+    /// <returns>
+    /// Boolean value escribing whether further inputs / actions should be processed in this fixed update frame
+    /// </returns>
+    /// <param name="returnIfDodging"> Specify if dodge should cause return (returns <c>false</c>)</param>
+    /// <param name="doDodgeMovement"> Specify if dodge should be executed when <c>isDodging==true</c> </param>
+    /// <param name="doFixedMovement"> Specify wheter movement input should be processed in this fixed update frame </param>
+    protected bool OnFixedUpdateTasks(
+        bool returnIfDodging = true,
+        bool doDodgeMovement = true,
+        bool doFixedMovement = true) {
+        if(IsDodging() && returnIfDodging) {
+            if(doDodgeMovement) {
+                FixedDodgeMovement();
+            }
+            return false;
+        }
+
+        if (doFixedMovement) {
+            FixedMovementOnRigidbody2D();
+            return false;
+        }
+
+        return true;
     }
 }
 

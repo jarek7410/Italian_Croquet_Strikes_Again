@@ -9,23 +9,11 @@ namespace GameNamespace {
 
     private void Update()
     {
-        if(IsDodging()) {
-            return;
-        }
-
-        if (GetDodgeInput())
-        {
-            Dodge(GetMovementInput());
-        }
+        OnUpdateTasks();
     }
 
     private void FixedUpdate() {
-        if (IsDodging())
-        {
-            FixedDodgeMovement();
-            return;
-        }        
-        FixedMovementOnRigidbody2D();
+        OnFixedUpdateTasks();
     }
 
 }

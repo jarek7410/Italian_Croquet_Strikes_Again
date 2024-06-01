@@ -21,6 +21,10 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     [SerializeField] protected float MimDistance = 1.05f;
     protected PlayerAbstract player;
     protected NavMeshAgent navMeshAgent;
+    protected abstract void Attack();
+    protected abstract Vector2 GetMovement();
+
+    private bool _isFrozen = false;
 
     // a utility function that executes all initializations, EnemyStats, RigidBody2d etc...
     // if you do not want to init a component set doInit_componentName_ to false in parameters
@@ -95,7 +99,6 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         }
         rb2d.AddForce(force);
     }
-    protected abstract Vector2 GetMovement();
 
     protected void FixedMovementOnRigidbody2D() {
         float speed = stats.GetCurrentStat(EntityStats.SPEED_ID);
@@ -125,6 +128,16 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         rb2d.AddForce(direction.normalized * force, ForceMode2D.Impulse);
     }
 
+    public float ToPlayerDistance () {
+        Vector3 toPlayer = player.transform.position - transform.position;
+        toPlayer.z = 0;
+        return toPlayer.magnitude;
+    }
+    public Vector2 ToPlayerDirection() {
+        Vector3 toPlayer3D = player.transform.position - transform.position;
+        Vector2 toPlayer = new Vector2(toPlayer3D.x, toPlayer3D.y);
+        return toPlayer.normalized;
+    }
     protected Vector2 NavMeshDirectionToPlayer() {
         Vector3 playerPosition = player.transform.position;
 
@@ -141,5 +154,17 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
 
         return new Vector2(corners[1].x - corners[0].x, corners[1].y - corners[0].y).normalized;
     }
+
+    protected void Freeze() {
+        _isFrozen = true;
+    }
+    protected void Unfreeze() {
+        _isFrozen = false;
+    }
+
+    public bool IsFrozen() {
+        return _isFrozen;
+    }
+
 }
 

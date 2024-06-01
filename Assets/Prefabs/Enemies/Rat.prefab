@@ -192,6 +192,11 @@ MonoBehaviour:
   baseToxineResistance: 50
   AwarnessDisdtanse: 12
   MimDistance: 1.05
+  attackHitbox: {fileID: -3198020669135455338, guid: 2b8c9f51b0177f0458cfb060f439aace, type: 3}
+  attackOffset: 1.2
+  attackTime: 0.25
+  attackDistance: 1
+  afterAttackCooldown: 0.8
 --- !u!195 &6851415874910556360
 NavMeshAgent:
   m_ObjectHideFlags: 0

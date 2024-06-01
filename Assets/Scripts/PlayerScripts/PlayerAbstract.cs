@@ -154,6 +154,11 @@ namespace GameNamespace {
 
     public void DealDamage(AttackParams attackParams) {
         stats.ApplyDamage(attackParams);
+        if (stats.GetHP() <= 0) {
+            // Game over
+            // TODO: Death screen and player HP indicator
+            Destroy(gameObject);
+        }
     }
 
     public float GetCurrentStat(byte statId) {

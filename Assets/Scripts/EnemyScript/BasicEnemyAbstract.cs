@@ -19,6 +19,7 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     [SerializeField] protected float baseToxineResistance = 50f;
     [SerializeField] protected float AwarnessDisdtanse = 5f;
     [SerializeField] protected float MimDistance = 1.05f;
+    [SerializeField] protected int expierienceGranted = 5;
     protected PlayerAbstract player;
     protected NavMeshAgent navMeshAgent;
     protected abstract void Attack();
@@ -126,6 +127,7 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     }
     protected void OnKill() {
         Debug.Log($"{gameObject.name} died");
+        player.GrantExpierience(expierienceGranted);
     }
 
     public void Knockback(Vector2 direction, float force) {

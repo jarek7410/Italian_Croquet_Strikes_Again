@@ -20,6 +20,7 @@ namespace GameNamespace {
     [SerializeField] protected float dodgeMultiplier = 1.5f;
     [SerializeField] protected float dodgeTime = .5f;
 
+    protected ExpierienceHelper expierienceHelper = new ExpierienceHelper();
     private bool isDodging = false;
 
     private Vector2 dodgeDirection;
@@ -214,6 +215,11 @@ namespace GameNamespace {
         }
 
         return true;
+    }
+
+    public void GrantExpierience(int xpAmount) {
+        expierienceHelper.GainExpierience(xpAmount);
+        Debug.Log(expierienceHelper.XPdescription());
     }
 }
 

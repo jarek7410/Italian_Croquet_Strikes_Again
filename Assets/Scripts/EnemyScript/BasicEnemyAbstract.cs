@@ -24,6 +24,10 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     protected abstract void Attack();
     protected abstract Vector2 GetMovement();
 
+    protected int navAngentUpdateInterval = 8;
+    protected int navAgentLastUpdate = -999;
+    protected Vector2 navDirToPlayer;
+
     private bool _isFrozen = false;
 
     // a utility function that executes all initializations, EnemyStats, RigidBody2d etc...
@@ -139,6 +143,10 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         return toPlayer.normalized;
     }
     protected Vector2 NavMeshDirectionToPlayer() {
+        if (Time.frameCount - navAgentLastUpdate <= navAngentUpdateInterval) {
+            return navDirToPlayer;
+        }
+
         Vector3 playerPosition = player.transform.position;
 
         navMeshAgent.SetDestination(new Vector3(
@@ -152,7 +160,9 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
             return new Vector2(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y).normalized;
         }
 
-        return new Vector2(corners[1].x - corners[0].x, corners[1].y - corners[0].y).normalized;
+        navDirToPlayer = new Vector2(corners[1].x - corners[0].x, corners[1].y - corners[0].y).normalized;
+        navAgentLastUpdate = Time.frameCount;
+        return navDirToPlayer;
     }
 
     protected void Freeze() {

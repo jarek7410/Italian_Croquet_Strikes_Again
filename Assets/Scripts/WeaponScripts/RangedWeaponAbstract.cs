@@ -24,19 +24,21 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
     }
 
     protected void ShootBullet() {
-        Vector3 shotDirection = player.ToMouseDirection();
-        if (shotDirection == Vector3.zero) {
-            return;
-        }
-        float shotOffset = UnityEngine.Random.Range(- weaponParams.spreadDegrees, weaponParams.spreadDegrees);
-        shotDirection = Quaternion.AngleAxis(shotOffset, Vector3.forward) * shotDirection;
+        for (int i = 0; i < weaponParams.bulletsPerShot; i++) {
+            Vector3 shotDirection = player.ToMouseDirection();
+            if (shotDirection == Vector3.zero) {
+                return;
+            }
+            float shotOffset = UnityEngine.Random.Range(- weaponParams.spreadDegrees, weaponParams.spreadDegrees);
+            shotDirection = Quaternion.AngleAxis(shotOffset, Vector3.forward) * shotDirection;
 
-        var bulletInstatce = Instantiate(bullet, transform.position, transform.rotation);
-        bulletInstatce.Init(
-            weaponParams.bulletParams.bulletSpeed,
-            weaponParams.bulletParams.bulletLifetime,
-            player.GetCurrentStat(EntityStats.RANGED_DAMAGE_ID),
-            shotDirection);
+            var bulletInstatce = Instantiate(bullet, transform.position, transform.rotation);
+            bulletInstatce.Init(
+                weaponParams.bulletParams.bulletSpeed,
+                weaponParams.bulletParams.bulletLifetime,
+                player.GetCurrentStat(EntityStats.RANGED_DAMAGE_ID) * weaponParams.damageMultiplier,
+                shotDirection);
+        }
 
         isShotReady = false;
         weaponParams.DecrementBullets();

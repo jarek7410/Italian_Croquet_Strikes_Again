@@ -15,7 +15,12 @@ namespace GameNamespace
             public float bulletSpeed = 8f;
         }
         public bool isAutomatic = false;
+        public float damageMultiplier = 1f;
+        public int bulletsPerShot = 1;
         public int  magazineSize = 6;
+        public int ammoReserveSize = 150;
+        private int bulletsInReserve;
+        public int bulletsInAmmoBoxes = 90;
         private int bulletsInMagazine;
         public float betweenShotsTime = .4f; 
         public float reloadTime = 1.5f;
@@ -33,15 +38,26 @@ namespace GameNamespace
                 magazineSize = 1;
             }
             bulletsInMagazine = magazineSize;
+            bulletsInReserve = ammoReserveSize;
         }
 
         public void DecrementBullets() {
             bulletsInMagazine--;
-            Debug.Log($"Bullets {bulletsInMagazine}/{magazineSize}");
+            Debug.Log($"Bullets {bulletsInMagazine}/{magazineSize}, {bulletsInReserve} left in stock");
         }
 
         public void ReloadBullets() {
-            bulletsInMagazine = magazineSize;
+            bulletsInReserve += bulletsInMagazine;
+            int reloadedCount = bulletsInReserve >= magazineSize ? magazineSize : bulletsInReserve;
+            bulletsInMagazine = reloadedCount;
+            bulletsInReserve -= reloadedCount;
+        }
+
+        public void RefillAmmo() {
+            bulletsInReserve += bulletsInAmmoBoxes;
+            if (bulletsInReserve > ammoReserveSize) {
+                bulletsInReserve = ammoReserveSize;
+            }
         }
 
         public int BulletsLeft() {

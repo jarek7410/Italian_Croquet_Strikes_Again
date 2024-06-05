@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: SampleRangedWeaponParams
   m_EditorClassIdentifier: 
   isAutomatic: 1
+  damageMultiplier: 1
+  bulletsPerShot: 6
   magazineSize: 30
+  ammoReserveSize: 150
+  bulletsInAmmoBoxes: 90
   betweenShotsTime: 0.08
   reloadTime: 0.5
   spreadDegrees: 5

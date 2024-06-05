@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotgunParams
   m_EditorClassIdentifier: 
   isAutomatic: 0
-  damageMultiplier: 0.2
+  damageMultiplier: 0.4
   bulletsPerShot: 6
   magazineSize: 2
   ammoReserveSize: 24
@@ -23,4 +23,4 @@ MonoBehaviour:
   spreadDegrees: 8
   bulletParams:
     bulletLifetime: 2.29
-    bulletSpeed: 9
+    bulletSpeed: 19.9

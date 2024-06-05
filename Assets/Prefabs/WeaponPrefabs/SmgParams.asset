@@ -23,4 +23,4 @@ MonoBehaviour:
   spreadDegrees: 1.5
   bulletParams:
     bulletLifetime: 2
-    bulletSpeed: 14
+    bulletSpeed: 27.9

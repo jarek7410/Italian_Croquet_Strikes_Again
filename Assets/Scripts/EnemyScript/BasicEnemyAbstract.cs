@@ -30,6 +30,7 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     protected Vector2 navDirToPlayer;
 
     private bool _isFrozen = false;
+    private bool _isDead = false;
 
     // a utility function that executes all initializations, EnemyStats, RigidBody2d etc...
     // if you do not want to init a component set doInit_componentName_ to false in parameters
@@ -122,6 +123,10 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     }
 
     public void Kill() {
+        if (_isDead) {
+            return;
+        }
+        _isDead = true;
         OnKill();
         Destroy(gameObject);
     }

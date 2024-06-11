@@ -418,7 +418,20 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Steampunk Corse Elements_0: 6777549791784905231
+      Steampunk Corse Elements_1: -4077185769506895564
+      Steampunk Corse Elements_10: -2460903441766922282
+      Steampunk Corse Elements_11: -6901324144303362799
+      Steampunk Corse Elements_12: -6954368672782503341
+      Steampunk Corse Elements_2: -2986502877263695618
+      Steampunk Corse Elements_3: 5814915411594832906
+      Steampunk Corse Elements_4: -129980650561033627
+      Steampunk Corse Elements_5: -4620323640639296997
+      Steampunk Corse Elements_6: 6457513961950435282
+      Steampunk Corse Elements_7: -7120718083304939156
+      Steampunk Corse Elements_8: 8378756510892315808
+      Steampunk Corse Elements_9: 2832271590588970627
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

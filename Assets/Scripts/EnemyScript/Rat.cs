@@ -12,9 +12,7 @@ namespace EnemyScript
         [SerializeField] protected float afterAttackCooldown = 0.6f;
 
         private void Start() {
-            Debug.Log("Running Rat.Start()");
             CombinedInit();
-            
         }
 
         private void FixedUpdate()

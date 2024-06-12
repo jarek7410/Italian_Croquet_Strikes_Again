@@ -31,8 +31,6 @@ public class GameLogic : MonoBehaviour
         gameState = Instantiate(staringState);
         SpawnPlayer();
         FetchEnemies();
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
 
@@ -49,9 +47,8 @@ public class GameLogic : MonoBehaviour
         }
     }
 
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        Debug.Log("OnSceneLoaded executed");
-        TeleportPlayerToSpawn();
+    public void OnSceneEnter() {
+        Debug.Log("OnSceneEnter executed");
         FetchEnemies();
     }
 
@@ -65,21 +62,19 @@ public class GameLogic : MonoBehaviour
         }
     }
 
-    private void TeleportPlayerToSpawn() {
-        var spawnPoint = GameObject.FindGameObjectWithTag("Spawn");
-        if (spawnPoint == null) {
-            throw new Exception("No spawn point in scene");
-        }
-        if (_player == null) {
+    public void TeleportPlayer( Vector3 target) {
+        Debug.Log("Recieved vector: " + target);
+        if (_playerInstance == null) {
             return;
         }
-        _player.transform.position = spawnPoint.transform.position;
+        _playerInstance.transform.position = target;
     }
 
     public void OnLevelExit() {
         // Generate new level and teleport player
         var nextLevel = gameState.GetRandomLevel();
         SceneManager.LoadScene(nextLevel.name, LoadSceneMode.Single);
+        OnSceneEnter();
     }
 
     private void DestroyExitWalls() {

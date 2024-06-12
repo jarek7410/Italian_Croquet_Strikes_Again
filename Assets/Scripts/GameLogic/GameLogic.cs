@@ -34,7 +34,7 @@ public class GameLogic : MonoBehaviour
         SpawnPlayer();
         FetchEnemies();
         var equipment = FindAnyObjectByType<WeaponEquipment>();
-        equipment.weapon1 = chosenSettings.chosenWeapon;
+        equipment.weapon1object = chosenSettings.chosenWeapon;
     }
 
 

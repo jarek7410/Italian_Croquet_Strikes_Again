@@ -8,8 +8,8 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
     [SerializeField] public RangedWeaponParams weaponParams;
     [SerializeField] protected Bullet bullet;
     [SerializeField] private float distanceToPlayer = .7f;
-    protected bool isReloading = false;
-    protected bool isShotReady = true;
+    public bool isReloading = false;
+    public bool isShotReady = true;
     private Transform _playerTransform;
 
     protected void InitPlayer() {

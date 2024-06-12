@@ -47,7 +47,7 @@ public class EntityStats : ScriptableObject
                     Init();
     }
 
-    private void Init()
+    public void Init()
     {
         HP = baseMaxHP;
         _nextExpiration = float.MaxValue;

@@ -53,6 +53,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6132792771392252062, guid: 6ee05d5a13165e94f916c8c66c247cee, type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fa1e65fcf08bbbf43a4b724510208d31, type: 3}
+    - target: {fileID: 6132792771392252062, guid: 6ee05d5a13165e94f916c8c66c247cee, type: 3}
+      propertyPath: realoadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 820cb65ec31b28d4bb25e17595fdc81a, type: 3}
+    - target: {fileID: 6132792771392252062, guid: 6ee05d5a13165e94f916c8c66c247cee, type: 3}
       propertyPath: weaponParams
       value: 
       objectReference: {fileID: 11400000, guid: da49ec224270bcf449932d8896c2efc9, type: 2}

@@ -5,6 +5,7 @@ namespace GameNamespace{
         private void Start() {
             InitPlayer();
             weaponParams.Init();
+            InitAudioSource();
         }
 
         private void Update() {

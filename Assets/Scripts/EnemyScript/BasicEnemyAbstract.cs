@@ -4,9 +4,12 @@ using UnityEngine.AI;
 
 public abstract class BasicEnemyAbstract : MonoBehaviour
 {
+    [SerializeField] protected AudioClip deathSound;
+    [SerializeField] protected AudioClip attackSound;
     [SerializeField] public EntityStats stats;
     [SerializeField] protected Rigidbody2D rb2d;
     [SerializeField] protected SpriteRenderer sr;
+    [SerializeField] protected AudioSource audioSource;
     // Floats storing default enemy stats, used for initialization
     [SerializeField] protected float AwarnessDisdtanse = 5f;
     [SerializeField] protected float MimDistance = 1.05f;
@@ -34,7 +37,8 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         bool doInitRigidBody2D = true,
         bool doInitSpriteRenderer = true,
         bool doInitNavMeshAgent = true,
-        bool doInitGameLogic = true) {
+        bool doInitGameLogic = true,
+        bool doInitAudioSource = true) {
             if (doInitStats) {
                 InitEnemyStats();
             }
@@ -51,6 +55,10 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
                 gameLogic = GameLogic.Instance;
             }
 
+            if (doInitAudioSource) {
+                InitAudioSource();
+            }
+
             player = FindFirstObjectByType<PlayerAbstract>();
             if (player == null)
             {
@@ -60,10 +68,10 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
             
     }
     protected void InitEnemyStats() {
-        if (stats != null) {
-            return;
+        if (stats == null) {
+            stats = ScriptableObject.CreateInstance<EntityStats>();
         }
-        stats = ScriptableObject.CreateInstance<EntityStats>();
+        stats.Init();
     }
 // by default not using gravity (Rigidbody2d.gravityScale = 0.0)
 // and increasing the drag
@@ -91,6 +99,11 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         }
     }
 
+    protected void InitAudioSource() {
+        if (audioSource == null) {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
     protected void InitGameLogic() {
         gameLogic = GameLogic.Instance;
     }
@@ -124,12 +137,20 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         }
         _isDead = true;
         OnKill();
-        Destroy(gameObject);
+        Freeze();
+        
+        Invoke(nameof(DestroySelf), deathSound.length);
     }
+
+    private void DestroySelf() {
+            Destroy(gameObject);
+        }
     protected void OnKill() {
         Debug.Log($"{gameObject.name} died");
         gameLogic.OnEnemyDeath(this);
         player.GrantExpierience(expierienceGranted);
+        audioSource.clip = deathSound;
+        audioSource.Play();
     }
 
     public void Knockback(Vector2 direction, float force) {

@@ -46,6 +46,9 @@ namespace EnemyScript
                 stats.GetCurrentStat(EntityStats.MELEE_DAMAGE_ID));
             Freeze();
             Invoke(nameof(Unfreeze), afterAttackCooldown);
+
+            audioSource.clip = attackSound;
+            audioSource.Play();
         }
     }
 }

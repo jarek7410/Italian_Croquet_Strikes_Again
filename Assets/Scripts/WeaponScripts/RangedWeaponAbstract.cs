@@ -1,6 +1,7 @@
 using System;
 using GameNamespace;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public abstract class RangedWeaponAbstract : WeaponAbstract
 {
@@ -8,6 +9,9 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
     [SerializeField] public RangedWeaponParams weaponParams;
     [SerializeField] protected Bullet bullet;
     [SerializeField] private float distanceToPlayer = .7f;
+    [SerializeField] protected AudioClip realoadSound;
+    [SerializeField] protected AudioClip shootSound;
+    [SerializeField] protected AudioSource audioSource;
     public bool isReloading = false;
     public bool isShotReady = true;
     private Transform _playerTransform;
@@ -20,6 +24,12 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
                 throw new Exception("no player found");
             }
             _playerTransform = player.transform;
+        }
+    }
+
+    protected void InitAudioSource() {
+        if (audioSource == null) {
+            audioSource = GetComponent<AudioSource>();
         }
     }
 
@@ -43,6 +53,9 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
         isShotReady = false;
         weaponParams.DecrementBullets();
         Invoke(nameof(ReadyShot), weaponParams.betweenShotsTime);
+
+        audioSource.clip = shootSound;
+        audioSource.Play();
     }
 
     protected bool GetShootInput() {
@@ -76,6 +89,9 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
     public void Reload() {
         isReloading = true;
         Invoke(nameof(FinishReloading), weaponParams.reloadTime);
+
+        audioSource.clip = realoadSound;
+        audioSource.Play();
     }
 
     protected void FinishReloading() {

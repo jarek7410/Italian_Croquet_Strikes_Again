@@ -229,8 +229,7 @@ public abstract class PlayerAbstract : MonoBehaviour
     }
 
     public void RefillAmmo() {
-        var equipment = GetComponent<WeaponEquipment>();
-        var gun = equipment.GetComponent<RangedWeaponAbstract>();
+        var gun = FindAnyObjectByType<RangedWeaponAbstract>();
         gun.weaponParams.RefillAmmo();
     }
 }

@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staringState: {fileID: 11400000, guid: b21d1c63f31d57a4899db778c9bd9bb4, type: 2}
-  playerPrefab: {fileID: 727064859645738096, guid: cae5d4ef757b820448caf4ec668bbc52, type: 3}
+  playerPrefab: {fileID: 727064859645738096, guid: 5449d8434469e0242ab0ce77409b14e9, type: 3}

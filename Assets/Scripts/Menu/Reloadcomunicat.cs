@@ -14,7 +14,9 @@ public class Reloadcomunicat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (weapon == null) {
+            weapon = FindAnyObjectByType<RangedWeaponAbstract>();
+        }   
     }
 
     // Update is called once per frame

@@ -206,4 +206,9 @@ public class EntityStats : ScriptableObject
     public float GetHP() {
         return HP;
     }
+
+    public void Heal(float health) {
+        float maxHp = GetCurrentStat(MAX_HP_ID);
+        HP = Math.Max(HP + health, maxHp);
+    }
 }

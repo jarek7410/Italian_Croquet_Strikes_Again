@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class WeaponEquipment : MonoBehaviour {
-    [SerializeField] private WeaponAbstract weapon1;
-    [SerializeField] private WeaponAbstract weapon2;
+    [SerializeField] public WeaponAbstract weapon1;
+    [SerializeField] public WeaponAbstract weapon2;
     private byte _equipedWeaponId;
 
     private void Start() {

@@ -222,5 +222,15 @@ public abstract class PlayerAbstract : MonoBehaviour
     public void GrantExpierience(int xpAmount) {
         expierienceHelper.GainExpierience(xpAmount);
         Debug.Log(expierienceHelper.XPdescription());
-    }    
+    }
+
+    public void Heal(float health) {
+        stats.Heal(health);
+    }
+
+    public void RefillAmmo() {
+        var equipment = GetComponent<WeaponEquipment>();
+        var gun = equipment.GetComponent<RangedWeaponAbstract>();
+        gun.weaponParams.RefillAmmo();
+    }
 }

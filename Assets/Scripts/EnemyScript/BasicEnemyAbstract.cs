@@ -1,5 +1,4 @@
 using System;
-using GameNamespace;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +19,10 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     [SerializeField] protected float AwarnessDisdtanse = 5f;
     [SerializeField] protected float MimDistance = 1.05f;
     [SerializeField] protected int expierienceGranted = 5;
+    [SerializeField, Tooltip("Cost to spawn enemy from enemy spawner budget")]
+    public float spawnCost {get; protected set;} = 1f;
+    [SerializeField, Tooltip("Spawning rarity - greater means biiger proportionate chance")]
+    public float spawnRarity {get; protected set;} = 1f;
     protected GameLogic gameLogic;
     protected PlayerAbstract player;
     protected NavMeshAgent navMeshAgent;

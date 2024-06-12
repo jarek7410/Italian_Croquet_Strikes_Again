@@ -16,7 +16,8 @@ public class GameLogic : MonoBehaviour
     private GameState staringState;
     [SerializeField] 
     private GameObject playerPrefab;
-    private GameState gameState;
+    public GameState gameState {get; private set;}
+    public int onLevel {get; private set;} = 1;
 
     void Awake() {
         if (Instance != null && Instance != this) {
@@ -50,6 +51,7 @@ public class GameLogic : MonoBehaviour
     public void OnSceneEnter() {
         Debug.Log("OnSceneEnter executed");
         FetchEnemies();
+        onLevel++;
     }
 
     private void SpawnPlayer() {

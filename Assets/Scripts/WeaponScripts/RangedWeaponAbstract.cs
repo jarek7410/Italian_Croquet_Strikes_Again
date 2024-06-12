@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class RangedWeaponAbstract : WeaponAbstract
 {
     [SerializeField] protected PlayerAbstract player;
-    [SerializeField] protected RangedWeaponParams weaponParams;
+    [SerializeField] public RangedWeaponParams weaponParams { get; protected set; }
     [SerializeField] protected Bullet bullet;
     [SerializeField] private float distanceToPlayer = .7f;
     protected bool isReloading = false;

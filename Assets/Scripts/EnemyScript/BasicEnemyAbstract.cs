@@ -151,6 +151,8 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         player.GrantExpierience(expierienceGranted);
         audioSource.clip = deathSound;
         audioSource.Play();
+        var col = GetComponent<Collider2D>();
+        col.enabled = false;
     }
 
     public void Knockback(Vector2 direction, float force) {

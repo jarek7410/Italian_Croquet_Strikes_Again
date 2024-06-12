@@ -12,6 +12,7 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
     [SerializeField] protected AudioClip realoadSound;
     [SerializeField] protected AudioClip shootSound;
     [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected SpriteRenderer sr;
     public bool isReloading = false;
     public bool isShotReady = true;
     private Transform _playerTransform;
@@ -30,6 +31,9 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
     protected void InitAudioSource() {
         if (audioSource == null) {
             audioSource = GetComponent<AudioSource>();
+        }
+        if (sr == null) {
+            sr = GetComponent<SpriteRenderer>();
         }
     }
 
@@ -84,6 +88,12 @@ public abstract class RangedWeaponAbstract : WeaponAbstract
         float angle = Mathf.Atan2(toMouse.y, toMouse.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
         transform.rotation = rotation;
+
+        if (Vector3.Dot(toMouse, Vector3.right) >= 0) {
+            sr.flipY = false;
+        } else {
+            sr.flipY = true;
+        }
     }
 
     public void Reload() {

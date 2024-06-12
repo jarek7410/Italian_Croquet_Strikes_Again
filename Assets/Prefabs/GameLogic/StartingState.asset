@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: StartingState
   m_EditorClassIdentifier: 
   Levels:
-  - {fileID: 102900000, guid: 29f485f24511923469d98516bd380665, type: 3}
+  - EmptyLevel
   EnemiesToSpawn:
   - {fileID: 8628295845385508194, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}

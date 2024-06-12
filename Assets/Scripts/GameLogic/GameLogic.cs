@@ -75,7 +75,7 @@ public class GameLogic : MonoBehaviour
     public void OnLevelExit() {
         // Generate new level and teleport player
         var nextLevel = gameState.GetRandomLevel();
-        SceneManager.LoadScene(nextLevel.name, LoadSceneMode.Single);
+        SceneManager.LoadScene(nextLevel, LoadSceneMode.Single);
         OnSceneEnter();
     }
 

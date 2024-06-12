@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameState", menuName = "ScriptableObjects/GameState")]
 public class GameState : ScriptableObject{
 
-    [SerializeField, Tooltip("Remember to add all scenes to build (File > Build Settings)")]
-    SceneAsset[] Levels;
+    [SerializeField, Tooltip("Names os scenes (SceneAsset type doesnt work in build)\nRemember to add all scenes to build (File > Build Settings)")]
+    string[] Levels;
     [SerializeField, Tooltip("List of enemies that will be spawned in levels")]
     GameObject[] EnemiesToSpawn;
     private float[] enemiesRarities;
     private float cummulativeRarity;
 
-    public SceneAsset GetRandomLevel() {
+    public string GetRandomLevel() {
         var level = Levels[Random.Range(0, Levels.Length)];
         return level;
     }

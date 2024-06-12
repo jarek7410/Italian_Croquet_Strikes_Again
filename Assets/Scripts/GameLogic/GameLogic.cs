@@ -18,6 +18,7 @@ public class GameLogic : MonoBehaviour
     private GameObject playerPrefab;
     public GameState gameState {get; private set;}
     public int onLevel {get; private set;} = 1;
+    private ChosenSettings chosenSettings = ChosenSettings.Instance;
 
     void Awake() {
         if (Instance != null && Instance != this) {
@@ -32,6 +33,8 @@ public class GameLogic : MonoBehaviour
         gameState = Instantiate(staringState);
         SpawnPlayer();
         FetchEnemies();
+        var equipment = FindAnyObjectByType<WeaponEquipment>();
+        equipment.weapon1 = chosenSettings.chosenWeapon;
     }
 
 

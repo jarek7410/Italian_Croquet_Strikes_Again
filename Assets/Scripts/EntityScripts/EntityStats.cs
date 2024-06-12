@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace GameNamespace
-{
-    public class EntityStats : ScriptableObject
+
+[CreateAssetMenu(fileName = "EntityStats", menuName = "ScriptableObjects/EntityStats")]
+public class EntityStats : ScriptableObject
 {
     public static readonly byte MAX_HP_ID = 0;
     public static readonly byte SPEED_ID = 1;
@@ -206,5 +206,4 @@ namespace GameNamespace
     public float GetHP() {
         return HP;
     }
-}
 }

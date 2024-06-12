@@ -7,6 +7,9 @@ TagManager:
   - Obstacle
   - Enemy
   - Bullet
+  - Spawn
+  - LevelExit
+  - LevelExitWall
   layers:
   - Default
   - TransparentFX

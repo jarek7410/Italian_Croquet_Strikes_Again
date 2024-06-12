@@ -2,9 +2,6 @@
 using UnityEngine;
 
 // TODO: Need Testing
-
-namespace GameNamespace
-{
     public class StatModifier
     {
         private readonly byte _statId;
@@ -75,5 +72,5 @@ namespace GameNamespace
             return _value;
         }
         
-    }
+    
 }

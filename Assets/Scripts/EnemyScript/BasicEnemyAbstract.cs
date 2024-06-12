@@ -20,6 +20,7 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     [SerializeField] protected float AwarnessDisdtanse = 5f;
     [SerializeField] protected float MimDistance = 1.05f;
     [SerializeField] protected int expierienceGranted = 5;
+    protected GameLogic gameLogic;
     protected PlayerAbstract player;
     protected NavMeshAgent navMeshAgent;
     protected abstract void Attack();
@@ -37,7 +38,8 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     protected void CombinedInit(bool doInitStats = true,
         bool doInitRigidBody2D = true,
         bool doInitSpriteRenderer = true,
-        bool doInitNavMeshAgent = true) {
+        bool doInitNavMeshAgent = true,
+        bool doInitGameLogic = true) {
             if (doInitStats) {
                 InitEnemyStats();
             }
@@ -50,6 +52,10 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
             if (doInitNavMeshAgent) {
                 InitNavMeshAgent();
             }
+            if (doInitGameLogic) {
+                gameLogic = GameLogic.Instance;
+            }
+
             player = FindFirstObjectByType<PlayerAbstract>();
             if (player == null)
             {
@@ -99,6 +105,10 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
         }
     }
 
+    protected void InitGameLogic() {
+        gameLogic = GameLogic.Instance;
+    }
+
     protected void ForceOnRigidBody2D(Vector2 force) {
         if (force == Vector2.zero) {
             return;
@@ -132,6 +142,7 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     }
     protected void OnKill() {
         Debug.Log($"{gameObject.name} died");
+        gameLogic.OnEnemyDeath(this);
         player.GrantExpierience(expierienceGranted);
     }
 

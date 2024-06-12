@@ -1,8 +1,4 @@
 ﻿using System;
-using UnityEngine;
-
-namespace GameNamespace 
-{
     public class AttackParams
     {
         public static readonly byte MELEE = 0;
@@ -33,6 +29,3 @@ namespace GameNamespace
             return value;
         }
     }
-    
-        
-}

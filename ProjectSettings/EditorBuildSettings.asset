@@ -8,4 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/TrainLevel.unity
+    guid: 4403ce84660761e41ac354df6404b02a
+  - enabled: 1
+    path: Assets/Scenes/EmptyLevel.unity
+    guid: 29f485f24511923469d98516bd380665
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

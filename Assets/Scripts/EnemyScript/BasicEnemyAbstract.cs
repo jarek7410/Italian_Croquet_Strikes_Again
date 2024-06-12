@@ -15,9 +15,9 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     [SerializeField] protected float MimDistance = 1.05f;
     [SerializeField] protected int expierienceGranted = 5;
     [SerializeField, Tooltip("Cost to spawn enemy from enemy spawner budget")]
-    public float spawnCost {get; protected set;} = 1f;
+    public float spawnCost = 1f;
     [SerializeField, Tooltip("Spawning rarity - greater means biiger proportionate chance")]
-    public float spawnRarity {get; protected set;} = 1f;
+    public float spawnRarity = 1f;
     protected GameLogic gameLogic;
     protected PlayerAbstract player;
     protected NavMeshAgent navMeshAgent;

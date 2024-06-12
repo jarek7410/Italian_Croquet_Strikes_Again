@@ -17,3 +17,4 @@ MonoBehaviour:
   - SideRoomLevel
   EnemiesToSpawn:
   - {fileID: 8628295845385508194, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
+  - {fileID: 4982038053534554560, guid: e841097da7a21dc4e855b3ede5a42402, type: 3}

@@ -9,6 +9,9 @@ public class GameState : ScriptableObject{
     string[] Levels;
     [SerializeField, Tooltip("List of enemies that will be spawned in levels")]
     GameObject[] EnemiesToSpawn;
+
+    [SerializeField, Tooltip("ListOfGuns")]
+    public GameObject[] weapons;
     private float[] enemiesRarities;
     private float cummulativeRarity;
 

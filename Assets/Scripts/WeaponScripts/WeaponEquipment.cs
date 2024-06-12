@@ -1,15 +1,34 @@
 using UnityEngine;
 
 public class WeaponEquipment : MonoBehaviour {
-    [SerializeField] public GameObject weapon1object;
-    [SerializeField] public GameObject weapon2object;
-    private WeaponAbstract weapon1;
-    private WeaponAbstract weapon2;
+
+    [SerializeField] private WeaponAbstract smg;
+    [SerializeField] private WeaponAbstract shotgun;
+    [SerializeField] private WeaponAbstract revolver;
+    public WeaponAbstract weapon1;
+    [SerializeField]private WeaponAbstract weapon2;
     private byte _equipedWeaponId;
 
     private void Start() {
-        weapon1 = weapon1object.GetComponent<WeaponAbstract>();
-        weapon2 = weapon2object.GetComponent<WeaponAbstract>();
+
+        switch (ChosenSettings.Instance.weaponId) {
+            case 0:
+            weapon1 = smg;
+            Destroy(shotgun.gameObject);
+            Destroy(revolver.gameObject);
+            break;
+            case 1:
+            weapon1 = shotgun;
+            Destroy(smg.gameObject);
+            Destroy(revolver.gameObject);
+            break;
+            case 2:
+            weapon1 = revolver;
+            Destroy(smg.gameObject);
+            Destroy(shotgun.gameObject);
+            break;
+        }
+
         weapon1.Equip();
         weapon2.Unequip();
         _equipedWeaponId = 1;
@@ -30,8 +49,4 @@ public class WeaponEquipment : MonoBehaviour {
         }
     }
 
-    public void SetWeapon1(GameObject weaponObject) {
-        weapon1object = weaponObject;
-        weapon1 = weapon1object.GetComponent<WeaponAbstract>();
-    }
 }

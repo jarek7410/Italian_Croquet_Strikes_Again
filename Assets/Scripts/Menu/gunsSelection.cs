@@ -22,19 +22,19 @@ public class gunsSelection : MonoBehaviour
         var weponczousesetting = ChosenSettings.Instance;
         if (smg.isOn)
         {
-            weponczousesetting.chosenWeapon = smgBasicRangedWeapon;
+            weponczousesetting.weaponId = 0;
             return;
         }
 
         if (shotgun.isOn)
         {
-            weponczousesetting.chosenWeapon = shotgunBasicRangedWeapon;
+            weponczousesetting.weaponId = 1;
             return;
         }
 
         if (revolver.isOn)
         {
-            weponczousesetting.chosenWeapon = revolverBasicRangedWeapon;
+            weponczousesetting.weaponId = 2;
             return;
         }
     }

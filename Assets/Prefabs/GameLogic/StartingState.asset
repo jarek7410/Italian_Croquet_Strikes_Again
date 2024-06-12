@@ -18,3 +18,7 @@ MonoBehaviour:
   EnemiesToSpawn:
   - {fileID: 8628295845385508194, guid: 81a42d9f47b0fcb4a84bd9d9d7dc2de1, type: 3}
   - {fileID: 4982038053534554560, guid: e841097da7a21dc4e855b3ede5a42402, type: 3}
+  weapons:
+  - {fileID: 1251481849867871536, guid: 6dfe7a90457d3ef438cf52b840d97eee, type: 3}
+  - {fileID: 9025042963944536529, guid: a22f83c7189f9714aa5615634c4fafda, type: 3}
+  - {fileID: 9025042963944536529, guid: f1415709b53582e4e8ff870ed77a2fdb, type: 3}

@@ -4,18 +4,10 @@ using UnityEngine.AI;
 
 public abstract class BasicEnemyAbstract : MonoBehaviour
 {
-    public EntityStats stats;
+    [SerializeField] public EntityStats stats;
     [SerializeField] protected Rigidbody2D rb2d;
     [SerializeField] protected SpriteRenderer sr;
     // Floats storing default enemy stats, used for initialization
-    [SerializeField] protected float baseMaxHP = 100f;
-    [SerializeField] protected float baseSpeed = 100f;
-    [SerializeField] protected float baseMeleeDamage = 30f;
-    [SerializeField] protected float baseRangedDamage = 20f;
-    [SerializeField] protected float baseMeleeResistance = 50f;
-    [SerializeField] protected float baseRangedResistance = 50f;
-    [SerializeField] protected float baseFireResistance = 50f;
-    [SerializeField] protected float baseToxineResistance = 50f;
     [SerializeField] protected float AwarnessDisdtanse = 5f;
     [SerializeField] protected float MimDistance = 1.05f;
     [SerializeField] protected int expierienceGranted = 5;
@@ -69,18 +61,9 @@ public abstract class BasicEnemyAbstract : MonoBehaviour
     }
     protected void InitEnemyStats() {
         if (stats != null) {
-            Debug.Log("Warning - Enemy stats are already initialized!");
             return;
         }
         stats = ScriptableObject.CreateInstance<EntityStats>();
-        stats.SetEntityStats(baseMaxHP,
-            baseSpeed,
-            baseMeleeDamage,
-            baseRangedDamage,
-            baseMeleeResistance,
-            baseRangedResistance,
-            baseFireResistance,
-            baseToxineResistance);
     }
 // by default not using gravity (Rigidbody2d.gravityScale = 0.0)
 // and increasing the drag

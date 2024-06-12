@@ -81,7 +81,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1604779847
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -3286189400204805870, guid: bacb39275657a5c41b462455d80cd045, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -179,23 +179,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0c38da9f264f908751e24cd42eeddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: c264151b3304cc1448e4a7b926942083, type: 2}
   rb2d: {fileID: 0}
   sr: {fileID: 0}
-  baseMaxHP: 50
-  baseSpeed: 90
-  baseMeleeDamage: 30
-  baseRangedDamage: 20
-  baseMeleeResistance: 50
-  baseRangedResistance: 50
-  baseFireResistance: 50
-  baseToxineResistance: 50
   AwarnessDisdtanse: 12
   MimDistance: 1.05
+  expierienceGranted: 5
   attackHitbox: {fileID: -3198020669135455338, guid: 2b8c9f51b0177f0458cfb060f439aace, type: 3}
-  attackOffset: 1.2
+  attackOffset: 1.4
   attackTime: 0.25
-  attackDistance: 1
+  attackDistance: 1.2
   afterAttackCooldown: 0.8
 --- !u!195 &6851415874910556360
 NavMeshAgent:

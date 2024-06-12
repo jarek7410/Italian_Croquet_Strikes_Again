@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private float spawnBudgetPerLevel = 0.2f;
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
         gameLogic = GameLogic.Instance;
         float totalBudget = baseSpawnBudget + spawnBudgetPerLevel * gameLogic.onLevel;
@@ -20,6 +20,9 @@ public class EnemySpawner : MonoBehaviour
             float enemyCost = enemyInstance.GetComponent<BasicEnemyAbstract>().spawnCost;
             totalBudget -= enemyCost;
         }
+
+        gameLogic.FetchEnemies();
+        Destroy(gameObject);
            
     }
 }

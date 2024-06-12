@@ -37,8 +37,6 @@ namespace GameNamespace
             if(magazineSize < 1) {
                 magazineSize = 1;
             }
-            bulletsInMagazine = magazineSize;
-            bulletsInReserve = ammoReserveSize;
         }
 
         public void DecrementBullets() {
@@ -62,6 +60,11 @@ namespace GameNamespace
 
         public int BulletsLeft() {
             return bulletsInMagazine;
+        }
+
+        public void Init() {
+            bulletsInMagazine = magazineSize;
+            bulletsInReserve = ammoReserveSize;
         }
     }
 }

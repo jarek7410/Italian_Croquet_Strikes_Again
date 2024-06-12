@@ -4,6 +4,7 @@ namespace GameNamespace{
     public class BasicRangedWeapon: RangedWeaponAbstract{
         private void Start() {
             InitPlayer();
+            weaponParams.Init();
         }
 
         private void Update() {

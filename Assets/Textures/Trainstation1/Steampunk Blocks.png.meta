@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Steampunk Blocks_0: 5095399153661299578
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

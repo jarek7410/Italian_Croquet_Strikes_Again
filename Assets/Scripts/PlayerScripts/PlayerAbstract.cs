@@ -30,6 +30,12 @@ public abstract class PlayerAbstract : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        if (horizontal < 0) {
+            sr.flipX = true;
+        } else {
+            sr.flipX = false;
+        }
+
         Vector2 inputVector = new Vector2(horizontal, vertical);
 
         if (inputVector.magnitude > 1f) {

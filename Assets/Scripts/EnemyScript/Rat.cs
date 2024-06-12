@@ -30,7 +30,14 @@ namespace EnemyScript
                 return Vector2.zero;
             }
 
-            return NavMeshDirectionToPlayer();
+            Vector2 direction = NavMeshDirectionToPlayer();
+            if (direction.x < 0) {
+                sr.flipX = true;
+            } else {
+                sr.flipX = false;
+            }
+
+            return direction;
         }
 
         protected override void Attack()

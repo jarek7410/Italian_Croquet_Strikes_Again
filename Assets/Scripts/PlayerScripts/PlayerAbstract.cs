@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public abstract class PlayerAbstract : MonoBehaviour
@@ -167,6 +168,8 @@ public abstract class PlayerAbstract : MonoBehaviour
             // Game over
             // TODO: Death screen and player HP indicator
             Destroy(gameObject);
+            Destroy(gameLogic.gameObject);
+            SceneManager.LoadScene(0);
         }
     }
 

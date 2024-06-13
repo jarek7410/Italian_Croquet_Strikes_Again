@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SideRoomLevel.unity
     guid: e714c05fcb84dc9428c2f7e6df1d5aee
+  - enabled: 1
+    path: Assets/Scenes/BigLevel.unity
+    guid: f4b8e1fdcf144ed4482572529a145c99
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
